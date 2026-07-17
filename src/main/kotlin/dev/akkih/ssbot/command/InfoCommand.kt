@@ -48,7 +48,7 @@ class InfoCommand {
             ).addComponents(
                 row(
                     link("https://sss.1m3.jp/", "Original Website"),
-                    link("https://github.com/akkih/ssbot", "GitHub Repository"),
+                    link("https://github.com/awkkih/ssbot", "GitHub Repository"),
                 )
             ).queue()
         }
