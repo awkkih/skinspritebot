@@ -9,7 +9,7 @@ import io.ktor.http.*
 
 class MinecraftSkinService(private val client: HttpClient) {
     suspend fun fetchSkin(username: String): ByteArray {
-        val response = client.get("${Links.Api.MCHEADS}/$username")
+        val response = client.get("${Links.Api.MCHEADS}/skin/$username")
 
         if (!response.status.isSuccess()) {
             throw IllegalArgumentException("Failed to fetch skin for '$username' from MC Heads API.\n\nCheck its availability with ${Commands.STATUS}.")
