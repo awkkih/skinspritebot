@@ -31,7 +31,6 @@ class StatusCommand {
                             title = "Platform Status"
                             description = "Status of external services. Some features may be unavailable if a service is down."
                             color = Colors.INFO
-                            thumbnail = Bot.thumbnailUrl
 
                             field {
                                 name = "MC Heads"

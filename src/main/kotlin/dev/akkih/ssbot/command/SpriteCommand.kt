@@ -55,7 +55,6 @@ class SpriteCommand {
                     val embed = Embed {
                         title = "${Emojis.CHECK} Avatar generated!"
                         image = "attachment://resized.png"
-                        thumbnail = Bot.thumbnailUrl
                         color = Colors.OK
 
                         footer {

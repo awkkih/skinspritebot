@@ -28,7 +28,6 @@ class InfoCommand {
                         Built by akkih and powered by [Skin Sprite Studio](${Links.Api.SKINSPRITE}) and [MCHeads](${Links.Api.MCHEADS}). ${Emojis.HEARTS}
                     """.trimIndent()
                     color = Colors.INFO
-                    thumbnail = Bot.thumbnailUrl
 
                     footer {
                         name = "Thanks for using the bot!"
