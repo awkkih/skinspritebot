@@ -1,7 +1,11 @@
 package dev.akkih.ssbot.command
 
+import dev.akkih.ssbot.Bot
 import dev.akkih.ssbot.Bot.client
 import dev.akkih.ssbot.util.Colors
+import dev.akkih.ssbot.util.Commands
+import dev.akkih.ssbot.util.Emojis
+import dev.akkih.ssbot.util.Links
 import dev.minn.jda.ktx.events.onCommand
 import dev.minn.jda.ktx.interactions.components.link
 import dev.minn.jda.ktx.interactions.components.row
@@ -13,32 +17,18 @@ class InfoCommand {
             event.replyEmbeds(
                 Embed {
                     title = "Skin Sprite Bot"
-                    description = "Turns Minecraft skins into rendered character sprites."
+                    description = """
+                        Turns Minecraft skins into rendered character sprites.
+                        
+                        **Commands**
+                        ${Emojis.ARROW} ${Commands.SPRITE_FILE}
+                        ${Emojis.ARROW} ${Commands.SPRITE_USERNAME}
+                        ${Emojis.ARROW} ${Commands.STATUS}
+                        
+                        Built by akkih and powered by [Skin Sprite Studio](${Links.Api.SKINSPRITE}) and [MCHeads](${Links.Api.MCHEADS}). ${Emojis.HEARTS}
+                    """.trimIndent()
                     color = Colors.INFO
-
-                    field {
-                        name = "🖼️ /sprite file"
-                        value = "Upload a `.png` skin (64x64 or 128x128, max 1MB) and get a rendered sprite back."
-                        inline = false
-                    }
-
-                    field {
-                        name = "🎮 /sprite username"
-                        value = "Give a Minecraft username and the bot fetches the skin automatically."
-                        inline = false
-                    }
-
-                    field {
-                        name = "📡 /status"
-                        value = "Check whether the external services this bot relies on are online."
-                        inline = false
-                    }
-
-                    field {
-                        name = "ℹ️ Credits"
-                        value = "Built by **akkih**!\nPowered by [Skin Sprite Studio](https://sss.1m3.jp/) and [MCHeads](https://mcheads.org/)."
-                        inline = false
-                    }
+                    thumbnail = Bot.thumbnailUrl
 
                     footer {
                         name = "Thanks for using the bot!"
@@ -47,8 +37,8 @@ class InfoCommand {
                 }
             ).addComponents(
                 row(
-                    link("https://sss.1m3.jp/", "Original Website"),
-                    link("https://github.com/awkkih/ssbot", "GitHub Repository"),
+                    link(Links.Api.SKINSPRITE, "Original Website"),
+                    link(Links.GH_PAGE, "GitHub Repository"),
                 )
             ).queue()
         }

@@ -1,5 +1,6 @@
 package dev.akkih.ssbot.command
 
+import dev.akkih.ssbot.Bot
 import dev.akkih.ssbot.Bot.client
 import dev.akkih.ssbot.Bot.cloudflareService
 import dev.akkih.ssbot.Bot.log
@@ -7,6 +8,8 @@ import dev.akkih.ssbot.Bot.minecraftService
 import dev.akkih.ssbot.Bot.spriteService
 import dev.akkih.ssbot.service.models.ConvertOptions
 import dev.akkih.ssbot.util.*
+import dev.akkih.ssbot.util.CanvasLayout.decodeBase64Image
+import dev.akkih.ssbot.util.CanvasLayout.renderPreview
 import dev.minn.jda.ktx.events.onCommand
 import dev.minn.jda.ktx.interactions.components.link
 import dev.minn.jda.ktx.jdabuilder.scope
@@ -50,8 +53,9 @@ class SpriteCommand {
                     val took = (System.nanoTime() - start) / 1_000_000_000.0
 
                     val embed = Embed {
-                        title = "Avatar generated!"
+                        title = "${Emojis.CHECK} Avatar generated!"
                         image = "attachment://resized.png"
+                        thumbnail = Bot.thumbnailUrl
                         color = Colors.OK
 
                         footer {
@@ -67,11 +71,11 @@ class SpriteCommand {
                 }
                 catch (_: CancellationException) {}
                 catch (ex: UserFacingError) {
-                    event.hook.editOriginalEmbeds(ErrorEmbed(ex.message ?: "Unknown error.")).queue()
+                    event.hook.editOriginalEmbeds(errorEmbed(ex.message ?: "Unknown error.")).queue()
                 }
                 catch (ex: Exception) {
                     log.error("Failed to convert skin", ex)
-                    event.hook.editOriginalEmbeds(ErrorEmbed(ex.message ?: "Unknown error.")).queue()
+                    event.hook.editOriginalEmbeds(errorEmbed(ex.message ?: "Unknown error.")).queue()
                 }
             }
         }

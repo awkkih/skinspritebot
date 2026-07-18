@@ -1,10 +1,12 @@
 package dev.akkih.ssbot.command
 
+import dev.akkih.ssbot.Bot
 import dev.akkih.ssbot.Bot.client
 import dev.akkih.ssbot.Bot.healthCheckService
 import dev.akkih.ssbot.Bot.log
 import dev.akkih.ssbot.util.Colors
-import dev.akkih.ssbot.util.ErrorEmbed
+import dev.akkih.ssbot.util.Emojis
+import dev.akkih.ssbot.util.errorEmbed
 import dev.minn.jda.ktx.events.onCommand
 import dev.minn.jda.ktx.jdabuilder.scope
 import dev.minn.jda.ktx.messages.Embed
@@ -29,21 +31,22 @@ class StatusCommand {
                             title = "Platform Status"
                             description = "Status of external services. Some features may be unavailable if a service is down."
                             color = Colors.INFO
+                            thumbnail = Bot.thumbnailUrl
 
                             field {
-                                name = "MC Heads Status"
+                                name = "MC Heads"
                                 value = generateFieldValue(mcHeads)
                                 inline = true
                             }
 
                             field {
-                                name = "Skin Sprite Studio Status"
+                                name = "Skin Sprite Studio"
                                 value = generateFieldValue(skinSpriteStudio)
                                 inline = true
                             }
 
                             field {
-                                name = "Cloudflare Worker Status"
+                                name = "Cloudflare Worker"
                                 value = generateFieldValue(cloudflareWorker)
                                 inline = true
                             }
@@ -57,7 +60,7 @@ class StatusCommand {
                         }
                     ).queue()
                 } catch (ex: Exception) {
-                    event.hook.editOriginalEmbeds(ErrorEmbed(ex.message ?: "Unknown error.")).queue()
+                    event.hook.editOriginalEmbeds(errorEmbed(ex.message ?: "Unknown error.")).queue()
                     log.error(ex.message ?: "Unknown error", ex)
                 }
             }
@@ -66,9 +69,9 @@ class StatusCommand {
 
     private fun generateFieldValue(ok: Boolean): String {
         return if (ok) {
-            "✅ Online"
+            "${Emojis.CHECK} Online"
         } else {
-            "❌ Offline"
+            "${Emojis.X} Offline"
         }
     }
 }

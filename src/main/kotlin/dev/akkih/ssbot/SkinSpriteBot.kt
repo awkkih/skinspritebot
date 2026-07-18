@@ -52,6 +52,8 @@ object Bot {
     val cloudflareService = CloudflareImageService(httpClient)
     val healthCheckService = HealthCheckService(httpClient)
 
+    val thumbnailUrl = "${config.WORKER_BASE_URL}/d/7114a527-5be4-431b-9e4f-04403cc4f22a.png"
+
     init {
         customizationOptions = generateSpriteCustomizationOptions()
 
